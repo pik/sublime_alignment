@@ -118,7 +118,10 @@ class AlignmentCommand(sublime_plugin.TextCommand):
             if alignment_space_chars == None:
                 alignment_space_chars = []
 
-            alignment_pattern = '|'.join([re.escape(ch) for ch in
+            if settings.get('alignment_regex'):
+                alignment_pattern = settings.get('alignment_regex')
+            else:
+                alignment_pattern = '|'.join([re.escape(ch) for ch in
                 alignment_chars])
 
             if perform_mid_line and alignment_chars:
